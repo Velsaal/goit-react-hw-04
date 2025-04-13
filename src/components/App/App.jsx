@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
 import Modal from 'react-modal';
+import { Toaster } from 'react-hot-toast';
 
 import SearchBar from '../SearchBar/SearchBar';
 import ImageGallery from '../ImageGallery/ImageGallery';
@@ -8,7 +8,7 @@ import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import ImageModal from '../ImageModal/ImageModal';
-import { fetchImages } from '../../services/api'; 
+import { fetchImages } from '../../services/api';
 
 Modal.setAppElement('#root');
 
@@ -23,6 +23,7 @@ function App() {
 
   useEffect(() => {
     if (!query) return;
+
     async function getImages() {
       try {
         setIsLoading(true);
@@ -36,14 +37,11 @@ function App() {
         setIsLoading(false);
       }
     }
+
     getImages();
   }, [query, page]);
 
   const handleSearch = value => {
-    if (value.trim() === '') {
-      toast.error('Please enter a search term');
-      return;
-    }
     if (value !== query) {
       setQuery(value);
       setImages([]);
